@@ -44,7 +44,6 @@ class StorageManager {
         } catch let error {
             print("Faild to fetch Data", error)
         }
-        
     }
     
     func save(_ taskName: String, in tableView: UITableView) {
