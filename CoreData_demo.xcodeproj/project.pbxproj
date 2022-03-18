@@ -12,7 +12,7 @@
 		CE884D1527DF1F7200513A73 /* CoreData_demo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE884D1327DF1F7200513A73 /* CoreData_demo.xcdatamodeld */; };
 		CE884D1727DF1F7600513A73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE884D1627DF1F7600513A73 /* Assets.xcassets */; };
 		CE884D1A27DF1F7600513A73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE884D1827DF1F7600513A73 /* LaunchScreen.storyboard */; };
-		CE884D2227DFBFBB00513A73 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE884D2127DFBFBB00513A73 /* TaskViewController.swift */; };
+		CE884D2827E1AC8D00513A73 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE884D2727E1AC8D00513A73 /* DataStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +23,7 @@
 		CE884D1627DF1F7600513A73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE884D1927DF1F7600513A73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE884D1B27DF1F7600513A73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CE884D2127DFBFBB00513A73 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		CE884D2727E1AC8D00513A73 /* DataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +56,47 @@
 		CE884D0927DF1F7200513A73 /* CoreData_demo */ = {
 			isa = PBXGroup;
 			children = (
-				CE884D0A27DF1F7200513A73 /* AppDelegate.swift */,
-				CE884D2127DFBFBB00513A73 /* TaskViewController.swift */,
-				CE884D0E27DF1F7200513A73 /* TaskListViewController.swift */,
+				CE884D2927E1AC9400513A73 /* DataStorage */,
+				CE884D2327E1AC1B00513A73 /* ViewControllers */,
+				CE884D2627E1AC6400513A73 /* App */,
 				CE884D1627DF1F7600513A73 /* Assets.xcassets */,
-				CE884D1827DF1F7600513A73 /* LaunchScreen.storyboard */,
+				CE884D2427E1AC2C00513A73 /* Storyboards */,
 				CE884D1B27DF1F7600513A73 /* Info.plist */,
-				CE884D1327DF1F7200513A73 /* CoreData_demo.xcdatamodeld */,
 			);
 			path = CoreData_demo;
+			sourceTree = "<group>";
+		};
+		CE884D2327E1AC1B00513A73 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CE884D0E27DF1F7200513A73 /* TaskListViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		CE884D2427E1AC2C00513A73 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				CE884D1827DF1F7600513A73 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		CE884D2627E1AC6400513A73 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CE884D0A27DF1F7200513A73 /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		CE884D2927E1AC9400513A73 /* DataStorage */ = {
+			isa = PBXGroup;
+			children = (
+				CE884D2727E1AC8D00513A73 /* DataStorage.swift */,
+				CE884D1327DF1F7200513A73 /* CoreData_demo.xcdatamodeld */,
+			);
+			path = DataStorage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE884D0F27DF1F7200513A73 /* TaskListViewController.swift in Sources */,
-				CE884D2227DFBFBB00513A73 /* TaskViewController.swift in Sources */,
+				CE884D2827E1AC8D00513A73 /* DataStorage.swift in Sources */,
 				CE884D1527DF1F7200513A73 /* CoreData_demo.xcdatamodeld in Sources */,
 				CE884D0B27DF1F7200513A73 /* AppDelegate.swift in Sources */,
 			);
