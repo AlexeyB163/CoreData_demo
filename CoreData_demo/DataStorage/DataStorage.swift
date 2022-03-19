@@ -13,13 +13,13 @@ class StorageManager {
     
     static let shared = StorageManager()
     
-    var taskList: [Task] = []
-    
-    lazy var context = persistentContainer.viewContext
+    private var context: NSManagedObjectContext {
+        persistentContainer.viewContext
+    }
     
     // MARK: - Core Data stack
     //persistentContainer - точка входа в базу данных
-    lazy var persistentContainer: NSPersistentContainer = {
+    private let persistentContainer: NSPersistentContainer = {
         
        // (name:____) - указывается название файла в котором будет находится модель с данными
         let container = NSPersistentContainer(name: "CoreData_demo")
@@ -34,76 +34,51 @@ class StorageManager {
     
     private init() {}
     
-    func fetchData() {
+    
+    // ПРИ РАБОТЕ С БД НУЖНО ИСПОЛЬЗОВАТЬ COMPLETION{}, чтобы можно было получать данные асинхронно и не было задержек между запросом к БД и получением результата.
+    func fetchData(completion: (Result<[Task], Error>) -> Void) {
         // Создаем запрос к БД. "Мы хотим получить объекты с типом Task"
         let fetchRequest = Task.fetchRequest()
         
         do {
-            //Добавляем в массив данные(тоже массив) из контекста.
-            taskList = try context.fetch(fetchRequest)
+            //Получаем данные(массив) из контекста.
+            let tasks = try context.fetch(fetchRequest)
+            completion(.success(tasks))
         } catch let error {
-            print("Faild to fetch Data", error)
+            completion(.failure(error))
         }
     }
     
-    func save(_ taskName: String, in tableView: UITableView) {
+    func save(_ taskName: String, completion: (Task) -> Void) {
         guard let entityDescription = NSEntityDescription.entity(forEntityName: "Task", in: context) else { return }
         guard let task = NSManagedObject(entity: entityDescription, insertInto: context) as? Task else { return }
 
         task.title = taskName
-        taskList.append(task)
-        
-        let cellIndex = IndexPath(row: taskList.count - 1, section: 0)
-        tableView.insertRows(at: [cellIndex], with: .automatic)
-        
+        completion(task)
         // Сохраняем в постоянное хранилище(Persistent Store)
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch let error {
-                print(error)
-            }
-        }
+        saveContext()
     }
     
-    func delete (at index: Int) {
-        let fetchRequest = Task.fetchRequest()
+    func reSave (_ task: Task, newTask: String) {
         
-        do {
-            try taskList = context.fetch(fetchRequest)
-        } catch let error {
-            print("Error: ", error)
-        }
+        task.title = newTask
+        saveContext()
+    }
+    
+    func delete(_ task: Task) {
         
-        let task = taskList[index]
         context.delete(task)
-        
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch let error {
-                print(error)
-            }
-        }
+        saveContext()
     }
     
-    func reSave(at index:Int, and text: String) {
-        
-        let fetchRequest = Task.fetchRequest()
-        
-        do {
-            try taskList = context.fetch(fetchRequest)
-        } catch let error {
-            print("Error: ", error)
-        }
-        let task = taskList[index]
-        task.title = text
-        
+    func saveContext () {
+        let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
                 try context.save()
-            } catch let error {
-                print(error)
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }

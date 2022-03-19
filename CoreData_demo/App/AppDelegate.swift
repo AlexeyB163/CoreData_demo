@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // Метод вызывается при выгрузке приложения из памяти
     func applicationWillTerminate(_ application: UIApplication) {
-        saveContext()
+        StorageManager.shared.saveContext()
     }
 
     // MARK: - Core Data stack
@@ -45,17 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // Метод проверяет были ли внесены какие либо изменения во временной области памяти
     // Если изменения были, то эти изменения нужно перенести из оперативной памяти в постоянное хранилище
-    func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
-    }
+   
 
 }
 
